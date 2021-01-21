@@ -36,7 +36,7 @@ class Spotifeed < Sinatra::Base
     return '' unless show_id =~ /\A\w{22}\z/
 
     show = $redis.cache("show:#{show_id}", 3600) do
-      JSON.generate spotify.conn.get("shows/#{show_id}?market=US&offset=50").body
+      JSON.generate spotify.conn.get("shows/#{show_id}?market=US&offset=50&limit=50").body
     end
     show = JSON.parse(show)
 
